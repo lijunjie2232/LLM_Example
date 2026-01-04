@@ -1,3 +1,7 @@
 .git/
 .gitignore
 README.md
+volumes/
+bin/
+lib/
+ollama-linux-amd64.tgz
