@@ -63,9 +63,6 @@ vector_store = Milvus(
     drop_old=True,
 )
 
-# vector_store.similarity_search_with_score(
-#     query="cors",
-# )
 
 retriever = vector_store.as_retriever()
 
@@ -77,16 +74,6 @@ prompt = (
 
 
 parser = StrOutputParser()
-
-# rag_chain = (
-#     {
-#         "context": retriever,
-#         "msg": RunnablePassthrough(),
-#     }
-#     | rag_prompt
-#     | model
-#     | parser
-# )
 
 
 @tool(response_format="content_and_artifact")
@@ -103,7 +90,7 @@ def retrieve_context(query: str, topk=5):
 agent = create_agent(
     model,
     tools=[retrieve_context],
-    system_prompt="You are a helpful assistant.",
+    system_prompt=prompt,
 )
 
 from fastapi import FastAPI
