@@ -4910,22 +4910,22 @@ def async_webloader(url):
             },
             header_template=headers,
         ).load()
-        sleep(1)
+        sleep(0.5)
         return document
     except Exception as e:
         print_exc()
         return e
 
 def main():
-    pool = ThreadPool(3)
+    pool = ThreadPool(17)
 
     results = pool.imap(async_webloader, [f"https://milvus.io/docs/{href}" for href in href_set],)
     
     for result in tqdm(results, total=len(href_set), desc="Downloading..."):
         if isinstance(result, Exception):
-            raise result
+            logger.error(str(result))
         else:
-            documents.append(result)
+            documents.extend(result)
 
     # dump documents to file fastapi_documents.pkl
 
@@ -4935,4 +4935,4 @@ def main():
     pass
 
 if __name__ == "__main__":
-
+    main()
