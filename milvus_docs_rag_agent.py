@@ -68,7 +68,7 @@ retriever = vector_store.as_retriever()
 
 
 prompt = (
-    "You have access to a tool that retrieves context from a blog post. "
+    "You have access to a tool that retrieves context from official documents. "
     "Use the tool to help answer user queries."
 )
 
